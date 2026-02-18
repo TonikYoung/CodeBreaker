@@ -10,12 +10,21 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            pegs(colors: [.red, .green, .green, .yellow])
+            pegs(colors: [.red, .blue, .green, .red])
+            pegs(colors: [.red, .yellow, .green, .blue])
         }
         .padding()
+    }
+
+    func pegs(colors: [Color]) -> some View {
+        HStack {
+            ForEach(colors.indices, id: \.self) { index in
+                Circle()
+                    .foregroundStyle(colors[index])
+            }
+            MatchMarkers(matches: [.exact, .inExact, .noMatch, .exact, .exact, .exact])
+        }
     }
 }
 
